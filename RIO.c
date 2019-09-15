@@ -8,7 +8,9 @@
 从管道(pipe)或终端机读取
 或者是read()被信号中断了读取动作。
 当有错误发生时则返回-1，错误代码存入errno中，而文件读写位置则无法预期。  
-rio_readn()与rio_writen()允许读写过程被应用的信号中断造成的实际读取的文件字节数比size_t n小
+rio_readn()与rio_writen()允许读写过程被应用的信号中断造成的实际读取的文件字节数比size_t n小。
+如果发生了上面出现的情况，则继续读写直到文件被读完或者读写到了规定的长度
+代码我都经过了简化，比书上的代码简洁多了
 
 ssize_t rio_readn(int fd, void* buf, size_t n)
 {
@@ -25,14 +27,9 @@ ssize_t rio_readn(int fd, void* buf, size_t n)
 		}
 		else if (nread < 0)
 		{
-			if (errno == EINTR)
-				nread = 0;
-			else
-				return -1;
+			if (errno != EINTR) return -1;
 		}
-		else (nread == 0)
-			break;
-
+		else break;
 	}
 	return n - left;
 }
@@ -54,12 +51,8 @@ ssize_t rio_writen(int fd, void* buf, size_t n)
 		}
 		else
 		{ 
-			if (errno == EINTR)
-				nwrite = 0;
-			else
-				return -1;
+			if (errno != EINTR) return -1;
 		}
-
 	}
 	return n-left;
 }
@@ -84,7 +77,8 @@ static ssize_t rio_read(rio_t *rp, char *usrbuf, size_t n)
 	{
 		while (rp->rio_cnt <= 0)
 		{
-			rp->rio_cnt = read(rp->rio_fd, rp->rio_buf, RIO_BUFSIZE)
+			rp->rio_cnt = read(rp->rio_fd, rp->rio_buf, RIO_BUFSIZE) 
+			// 这里可能读不到RIO_BUFSIZE大小，而是能读多少是多少，只要不是0或者不出错就行
 			if (rp->rio_cnt > 0)
 			{
 				rp->rio_bufp = rp->rio_buf;			
@@ -95,7 +89,7 @@ static ssize_t rio_read(rio_t *rp, char *usrbuf, size_t n)
 			}
 			else return 0;
 		}
-	}// 这里没有考虑的很复杂，没有继续上次的位置而是重新read
+	}// 这里没有考虑的很复杂，仅仅有一次调用read，能读多少是多少
 	int cnt = n;
 	if (rp->rio_cnt < n) cnt = rp->rio_cnt;
 	memcpy(usrbuf, rp->rio_bufp, cnt);
@@ -154,3 +148,4 @@ ssize_t rio_readlineb(rio_t *rp, void *usrbuf, size_t maxlen) // 在maxlen或者
 	*buf = 0;
 	return n - 1;
 }
+最后，个人认为，rio_readnb的性能比rio_readn有所下降，而rio_readlineb的性能比rio_readn有显著的提升
