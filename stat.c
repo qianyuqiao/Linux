@@ -19,3 +19,4 @@ int main(int argc, char** argv)
     printf("type: %s, read: %s\n", type, readok);
     return 0;
 }
+
