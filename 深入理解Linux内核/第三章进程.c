@@ -128,4 +128,4 @@ struct task_struct *pid_task(struct pid *pid, enum pid_type type)
 
 
 总结: 通过pid号码找到task_struct的流程：最重要的是hlist_head pid_hash
-pid_number->pid_chain->upid->pid->hlist_head->task_struct
+pid_number -> pid_chain -> upid -> pid -> hlist_head -> hlist_node -> task_struct
