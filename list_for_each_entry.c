@@ -6,6 +6,12 @@
 
 #define list_entry(ptr_of_member, type, member) \
 	container_of(ptr_of_member, type, member)
+
+
+#define container_of(ptr, type, member) ({              \         
+const typeof( ((type *)0)->member ) *__mptr = (ptr);    \         
+(type *)( (char *)__mptr - offsetof(type,member) );})
+#define offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
 注:
 0.pos是要查找的数据结构,head是类型为member的的链表节点
 1.container_of的作用是根据结构体中某个指针的地址获取该结构体的地址
