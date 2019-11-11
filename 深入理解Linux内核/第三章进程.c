@@ -109,7 +109,6 @@ struct pid *find_pid_ns(int nr, struct pid_namespace *ns)
 	return NULL;
 }
 
-
 struct task_struct *pid_task(struct pid *pid, enum pid_type type)
 {
 	struct task_struct *result = NULL;
@@ -126,3 +125,7 @@ struct task_struct *pid_task(struct pid *pid, enum pid_type type)
 #define hlist_first_rcu(head)	(*((struct hlist_node __rcu **)(&(head)->first)))
 其中,&pid->tasks[PIDTYPE_PID]实际上是&(pid->tasks[PIDTYPE_PID]),即 hlist_head* head;
 然后，#define hlist_entry(ptr, type, member) container_of(ptr,type,member)即通过task_struct中的hlist_node结构获得task_struct
+
+
+总结: 通过pid号码找到task_struct的流程：最重要的是hlist_head pid_hash
+pid_number->pid_chain->upid->pid->hlist_head->task_struct
