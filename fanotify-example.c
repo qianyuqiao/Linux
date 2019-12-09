@@ -29,7 +29,7 @@
 #include <sys/signalfd.h>
 #include <fcntl.h>
 
-#include <linux/fanotify.h>
+#include <sys/fanotify.h>
 
 /* Structure to keep track of monitored directories */
 typedef struct {
