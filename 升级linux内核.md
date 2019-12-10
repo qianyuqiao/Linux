@@ -3,6 +3,7 @@ https://www.tiny777.com/190614UbuntuUpdateKernel/
 难点：
 1.升级之后切换内核
 cat /boot/grub/grub.cfg | grep "menuentry" | grep "Ubuntu"
+<\br>
 `
 menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
 submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
