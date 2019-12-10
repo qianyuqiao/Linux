@@ -4,14 +4,14 @@ https://www.tiny777.com/190614UbuntuUpdateKernel/
 #1.升级之后切换内核
 cat /boot/grub/grub.cfg | grep "menuentry" | grep "Ubuntu"
 <br>
-`
+"
 menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
 submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
 	menuentry 'Ubuntu, with Linux 5.3.11-050311-generic' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.3.11-050311-generic-advanced-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
 	menuentry 'Ubuntu, with Linux 5.3.11-050311-generic (recovery mode)' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-5.3.11-050311-generic-recovery-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
 	menuentry 'Ubuntu, with Linux 4.15.0-72-generic' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-4.15.0-72-generic-advanced-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
 	menuentry 'Ubuntu, with Linux 4.15.0-72-generic (recovery mode)' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-4.15.0-72-generic-recovery-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
-`
+"
 第四行开始就是可以启动的内核列表
 如果想开机切换到Ubuntu, with Linux 4.15.0-72-generic，请看第二步
 
