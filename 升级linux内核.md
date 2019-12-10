@@ -27,7 +27,7 @@ GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
 GRUB_CMDLINE_LINUX_DEFAULT=""
 GRUB_CMDLINE_LINUX=""
 ```
-## 3.别忘了
+## 3.更新grub选项
 update-grub
 
 ## 4.检查grub.cfg
