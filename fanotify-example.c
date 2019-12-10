@@ -150,7 +150,7 @@ static int initialize_fanotify (int argc, const char **argv)
 
     /* Allocate array of monitor setups */
     n_monitors = argc - 1;
-    monitors = malloc (n_monitors * sizeof (monitored_t));
+    monitors = (monitored_t* )malloc (n_monitors * sizeof (monitored_t));
 
     /* Loop all input directories, setting up marks */
     for (i = 0; i < n_monitors; ++i)
