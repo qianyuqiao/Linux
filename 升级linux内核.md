@@ -11,7 +11,7 @@ apt-get upgrade
 这一步非常重要，反正执行这两个命令，直到没有任何报错信息才能进行下一步，如果有报错信息，请更换源或者百度谷歌解决方案。
 <br>
 ### 2.升级Ubuntu版本
-do-release-uupgrade
+do-release-upgrade
 <br>
 ### 3.重启
 然后输入 
