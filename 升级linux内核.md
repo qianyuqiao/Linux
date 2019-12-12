@@ -15,9 +15,9 @@ do-release-uupgrade
 <br>
 ### 3.重启
 然后输入 
-<br>
+```
 lsb_release -a
-<br>
+```
 正常从Ubuntu16.04升级到的Ubuntu18.04应该显示
 <br>
 ```
@@ -27,9 +27,12 @@ Description:	Ubuntu 18.04.3 LTS
 Release:	18.04
 Codename:	bionic
 ```
-然后查看内核版本,输入
-<br>
+然后查看内核版本
+<br>输入
+```
 uname -sr
+```
+输出
 ```
 Linux 4.15.0-72-generic
 ```
@@ -42,13 +45,13 @@ Linux 4.15.0-72-generic
 https://upload-images.jianshu.io/upload_images/17029102-a2ef7d1bc12d486c.png?imageMogr2/auto-orient/strip|imageView2/2/w/958/format/webp
 的第四条
 
-## 关于升级后内核切换的一个参考链接
+## 难点：升级之后切换内核，有一个参考链接
 https://www.tiny777.com/190614UbuntuUpdateKernel/
-
-## 难点：
-### 1.升级之后切换内核
+### 1.查看grub可选项
+```
 cat /boot/grub/grub.cfg | grep "menuentry" | grep "Ubuntu"
-<br>
+```
+我的输出
 ```
 menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
 submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-a9ea9ad8-c306-4d42-a094-b361053fbc13' {
@@ -62,7 +65,9 @@ submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-a9
 如果想开机切换到Ubuntu, with Linux 4.15.0-72-generic，请看第二步
 
 ### 2.修改grub
+```
 nano /etc/default/grub
+```
 修改为下面这个样子
 ```
 GRUB_DEFAULT=2
@@ -73,10 +78,13 @@ GRUB_CMDLINE_LINUX_DEFAULT=""
 GRUB_CMDLINE_LINUX=""
 ```
 ### 3.更新grub选项
+```
 update-grub
-
+```
 ### 4.检查grub.cfg
+```
 cat /boot/grub/grub.cfg | grep "set default"
+```
 这个时候应该是
 ```
    set default="${next_entry}"
