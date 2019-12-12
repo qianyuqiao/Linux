@@ -8,7 +8,7 @@
 ```
 	apt-get upgrade
 ```
-#### 这一步非常重要，反正执行这两个命令，直到没有任何报错信息才能进行下一步，如果有报错信息，请更换源或者百度谷歌解决方案。
+这一步非常重要，反正执行这两个命令，直到没有任何报错信息才能进行下一步，如果有报错信息，请更换源或者百度谷歌解决方案。
 <br>
 ### 2.升级Ubuntu版本
 do-release-uupgrade
@@ -17,6 +17,7 @@ do-release-uupgrade
 然后输入 
 lsb_release -a
 正常从Ubuntu16.04升级到的Ubuntu18.04应该显示
+<br>
 ```
 LSB Version:	core-9.20170808ubuntu1-noarch:printing-9.20170808ubuntu1-noarch:security-9.20170808ubuntu1-noarch
 Distributor ID:	Ubuntu
