@@ -45,8 +45,8 @@ Linux 4.15.0-72-generic
 https://upload-images.jianshu.io/upload_images/17029102-a2ef7d1bc12d486c.png?imageMogr2/auto-orient/strip|imageView2/2/w/958/format/webp
 的第四条
 
-## 难点：升级之后如果想实现切换内核，有一个参考链接
-https://www.tiny777.com/190614UbuntuUpdateKernel/
+## 难点：升级之后如果想实现切换内核，
+有一个参考链接https://www.tiny777.com/190614UbuntuUpdateKernel/
 <br>
 具体操作可总结如下
 ### 1.查看grub可选项
@@ -70,7 +70,7 @@ submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-a9
 ```
 nano /etc/default/grub
 ```
-修改为下面这个样子，记住，一定要把GRUB_TIMEOUT_STYLE这一行这注释掉否则还是会开机的时候还是会隐藏GR界面
+修改为下面这个样子，记住，一定要把GRUB_TIMEOUT_STYLE这一行这注释掉否则还是会开机的时候还是会隐藏GRUB界面
 ```
 GRUB_DEFAULT=2
 #GRUB_TIMEOUT_STYLE=hidden
