@@ -2,11 +2,11 @@
 ### 1.确保软件版本都是最新的
 执行
 ```
-	apt-get update
+apt-get update
 ```
 和
 ```
-	apt-get upgrade
+apt-get upgrade
 ```
 这一步非常重要，反正执行这两个命令，直到没有任何报错信息才能进行下一步，如果有报错信息，请更换源或者百度谷歌解决方案。
 <br>
@@ -15,7 +15,9 @@ do-release-uupgrade
 <br>
 ### 3.重启
 然后输入 
+<br>
 lsb_release -a
+<br>
 正常从Ubuntu16.04升级到的Ubuntu18.04应该显示
 <br>
 ```
@@ -25,7 +27,8 @@ Description:	Ubuntu 18.04.3 LTS
 Release:	18.04
 Codename:	bionic
 ```
-然后查看内核版本
+然后查看内核版本,输入
+<br>
 uname -sr
 ```
 Linux 4.15.0-72-generic
@@ -33,13 +36,13 @@ Linux 4.15.0-72-generic
 这个时候内核版本默认是4.15，如果还需要继续升级请参考下面的步骤
 ## 继续升级Ubuntu18.04的内核
 1.下载期望的内核版本
+<br>
 访问https://kernel.ubuntu.com/~kernel-ppa/mainline/
-下载对应版本的内核
-具体可参考
+下载对应版本的内核,具体可参考
 https://upload-images.jianshu.io/upload_images/17029102-a2ef7d1bc12d486c.png?imageMogr2/auto-orient/strip|imageView2/2/w/958/format/webp
 的第四条
 
-
+## 关于升级后内核切换的一个参考链接
 https://www.tiny777.com/190614UbuntuUpdateKernel/
 
 ## 难点：
