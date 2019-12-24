@@ -1,0 +1,22 @@
+```
+static int __handle_mm_fault(struct vm_area_struct *vma, unsigned long address,
+        unsigned int flags)
+{
+    struct vm_fault vmf = {
+        .vma = vma,
+        ...........
+    };
+    struct mm_struct *mm = vma->vm_mm;
+    pgd_t *pgd;
+    p4d_t *p4d;
+    int ret;
+    pgd = pgd_offset(mm, address);
+    p4d = p4d_alloc(mm, pgd, address);
+......
+    vmf.pud = pud_alloc(mm, p4d, address);
+......
+    vmf.pmd = pmd_alloc(mm, vmf.pud, address);
+......
+    return handle_pte_fault(&vmf);
+}
+```
