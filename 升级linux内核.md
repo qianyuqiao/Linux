@@ -41,9 +41,8 @@ Linux 4.15.0-72-generic
 1.下载期望的内核版本
 <br>
 访问https://kernel.ubuntu.com/~kernel-ppa/mainline/
-下载对应版本的内核,具体可参考
-https://upload-images.jianshu.io/upload_images/17029102-a2ef7d1bc12d486c.png?imageMogr2/auto-orient/strip|imageView2/2/w/958/format/webp
-的第四条
+下载安装对应版本的内核,具体步骤可参考https://www.tiny777.com/190614UbuntuUpdateKernel/
+
 
 ## 难点：升级之后如果想实现切换内核，
 有一个参考链接https://www.tiny777.com/190614UbuntuUpdateKernel/
