@@ -241,8 +241,7 @@ int main(int argc, const char **argv)
 	char dir0[100];
 	strcpy(dir0, argv[1]);
 	listdir(dir0, dirs);
-	cout << "dirs: " << endl;
-	for (string s: dirs) cout << s << endl;
+// 	for (string s: dirs) cout << s << endl;
     wd = (int *)calloc(dirs.size(), sizeof(int));
     if (wd == NULL)
     {
