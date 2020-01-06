@@ -1,4 +1,13 @@
+/*
+usage : 
+1. 编译: 
+    g++ sync_log.cpp -o sync_log -std=c++11
+2. 执行:
+    ./sync_log 源目录路径  源目录要实时同步到的目标目录路径
+3. 说明：
+    本代码支持对源目录的原有的子目录进行同步，但不支持对源目录新增的子目录进行同步
 
+*/
 #include <stdio.h>
 #include <iostream>
 #include <signal.h>
