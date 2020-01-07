@@ -237,7 +237,7 @@ int main(int argc, const char **argv)
     }
 
     /* Allocate memory for watch descriptors */
-	vector<string> dirs;
+    vector<string> dirs;
 	char dir0[100];
 	strcpy(dir0, argv[1]);
 	
@@ -274,7 +274,7 @@ int main(int argc, const char **argv)
 	string cmd = "rsync -av " + src + " " + dst;
 	if (!init_sync(cmd)) 
 	{
-		perror("init sync failed");
+		perror("init sync failed, source directory or destination directory may be invalid");
 		exit(EXIT_FAILURE);
 	}
     /* Now loop */
