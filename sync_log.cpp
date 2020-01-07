@@ -8,6 +8,15 @@ usage :
     本代码支持对源目录的原有的子目录进行同步，但不支持对源目录新增的子目录进行同步
 
 */
+/*usage : 
+1. ç¼–è¯‘: 
+	g++ sync_log.cpp -o sync_log -std=c++11
+2. æ‰§è¡Œ:
+	./sync_log æºç›®å½•è·¯å¾„  æºç›®å½•è¦å®žæ—¶åŒæ­¥åˆ°çš„ç›®æ ‡ç›®å½•è·¯å¾„
+3. è¯´æ˜Žï¼š
+	æœ¬ä»£ç æ”¯æŒå¯¹æºç›®å½•çš„åŽŸæœ‰çš„å­ç›®å½•è¿›è¡ŒåŒæ­¥ï¼Œä½†ä¸æ”¯æŒå¯¹æºç›®å½•æ–°å¢žçš„å­ç›®å½•è¿›è¡ŒåŒæ­¥
+
+*/
 #include <stdio.h>
 #include <iostream>
 #include <signal.h>
@@ -71,19 +80,20 @@ static bool exec(string check_command)
 
 static void listdir(char* path, vector<string>& Q)
 {
-     string pathstr = path;
+     string pathstr = "";
      Q.push_back(path);
      struct dirent* ent = NULL;
-     DIR *pDir;
-     pDir = opendir(path);
+     DIR *pDir = opendir(path);
      string cur = "";
-     while (NULL != (ent=readdir(pDir)))
+     char tmp[255];
+     while ((ent=readdir(pDir)))
      {
          if (ent->d_reclen==24 && ent->d_type == 4)
          {
+			memset(tmp, 0, sizeof(tmp));
             cur = ent->d_name;
             if (cur == "." || cur == "..") continue;
-            char tmp[100];
+			pathstr = path;
             pathstr += "/" + cur;
             strcpy(tmp, pathstr.c_str());
             listdir(tmp, Q);
@@ -228,7 +238,6 @@ int main(int argc, const char **argv)
     nfds_t nfds;
 
     /* Create the file descriptor for accessing the inotify API */
-
     fd = inotify_init1(IN_NONBLOCK);
     if (fd == -1)
     {
@@ -240,8 +249,10 @@ int main(int argc, const char **argv)
 	vector<string> dirs;
 	char dir0[100];
 	strcpy(dir0, argv[1]);
+	
 	listdir(dir0, dirs);
-// 	for (string s: dirs) cout << s << endl;
+	cout << "dirs: " << endl;
+	for (string s: dirs) cout << s << endl;
     wd = (int *)calloc(dirs.size(), sizeof(int));
     if (wd == NULL)
     {
@@ -272,6 +283,7 @@ int main(int argc, const char **argv)
 	string cmd = "rsync -av " + src + " " + dst;
 	if (!init_sync(cmd)) 
 	{
+		perror("init sync failed");
 		exit(EXIT_FAILURE);
 	}
     /* Now loop */
@@ -281,9 +293,7 @@ int main(int argc, const char **argv)
         /* Block until there is something to be read */
         if (poll(fds, FD_POLL_MAX, -1) < 0)
         {
-            fprintf(stderr,
-                    "Couldn't poll(): '%s'\n",
-                    strerror(errno));
+            fprintf(stderr, "Couldn't poll(): '%s'\n", strerror(errno));
             exit(EXIT_FAILURE);
         }
 
@@ -307,8 +317,7 @@ int main(int argc, const char **argv)
                 break;
             }
 
-            fprintf(stderr,
-                    "Received unexpected signal\n");
+            fprintf(stderr, "Received unexpected signal\n");
         }
 
         if (fds[1].revents & POLLIN)
