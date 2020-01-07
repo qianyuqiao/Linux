@@ -144,21 +144,20 @@ static void handle_events(int fd, int *wd, int argc, const char **argv, vector<s
             /* Print the name of the watched directory */
         }
     }
-	//bool res = exec(cmd);
-    //if (res) cout << "sync " << path << " to " << dest << " sucess!" ;
-    //else cout << "sync " << path << " to " << dest << " err!";
 
 }
 
 static bool init_sync(string cmd) 
 {
     bool res = exec(cmd);
-    if (res) {
+    if (res) 
+    {
 		cout << "init sync success" << endl;
 		return true;	
 	}
 
-    else {
+    else 
+    {
 		cout << "init sync failed" << endl;
 		return false;
 	}
@@ -205,9 +204,21 @@ int main(int argc, const char **argv)
     struct pollfd fds[FD_POLL_MAX];
 
     /* Input arguments... */
-    if (argc < 2)
+    if (argc < 3)
     {
-        fprintf(stderr, "Usage: %s directory1 [directory2 ...]\n", argv[0]);
+        fprintf(stderr, "Usage: %s [source directory] [destination directory]\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+    
+	if (access(argv[1], F_OK) < 0)    
+    {	
+		perror(argv[1]);
+		exit(EXIT_FAILURE);
+    }
+
+    if (access(argv[2], F_OK) < 0)
+    {
+        perror(argv[2]);
         exit(EXIT_FAILURE);
     }
 
@@ -237,7 +248,7 @@ int main(int argc, const char **argv)
     }
 
     /* Allocate memory for watch descriptors */
-    vector<string> dirs;
+	vector<string> dirs;
 	char dir0[100];
 	strcpy(dir0, argv[1]);
 	
@@ -274,7 +285,7 @@ int main(int argc, const char **argv)
 	string cmd = "rsync -av " + src + " " + dst;
 	if (!init_sync(cmd)) 
 	{
-		perror("init sync failed, source directory or destination directory may be invalid");
+		perror("init sync failed");
 		exit(EXIT_FAILURE);
 	}
     /* Now loop */
