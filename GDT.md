@@ -1,3 +1,6 @@
+参考资料：
+http://blog.chinaunix.net/uid-30245977-id-5588303.html
+
 ### GDT_ENTRY()
 为了进入保护模式，需要先建立临时GDT，Linux为了进入保护模式而建立临时GDT的代码如下：
 ```
