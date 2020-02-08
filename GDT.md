@@ -1,5 +1,6 @@
 参考资料：
 http://blog.chinaunix.net/uid-30245977-id-5588303.html
+<br>
 https://www.jianshu.com/p/c5770a06507a
 
 ### GDT_ENTRY()
