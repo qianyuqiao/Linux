@@ -47,8 +47,16 @@ static void setup_gdt(void)
      (((base) & _AC(0x00ffffff,ULL)) << 16) | \
      (((limit) & _AC(0x0000ffff,ULL))))
 ```
+显而易见，设置段描述符的一项
 2.
 ```
 	asm volatile("lgdtl %0" : : "m" (gdt));
 ```
 这句是把GDT的基址加载到了gdtr里面
+3.
+```
+#define __BOOT_CS		(GDT_ENTRY_BOOT_CS*8)
+#define __BOOT_DS		(GDT_ENTRY_BOOT_DS*8)
+#define __BOOT_TSS		(GDT_ENTRY_BOOT_TSS*8)
+```
+左移三位形成段选择符然后填入寄存器
