@@ -44,4 +44,4 @@ pop ebp
 pop ip
 ```
 一张图可以概括函数调用时的堆栈情况
-![https://github.com/qianyuqiao/Linux/blob/master/img/ebp_esp.png]
+![image](https://github.com/qianyuqiao/Linux/blob/master/img/ebp_esp.png)
