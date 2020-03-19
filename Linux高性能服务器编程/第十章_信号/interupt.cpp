@@ -1,3 +1,4 @@
+// 原文链接 https://www.cnblogs.com/black-mamba/p/6876320.html
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
