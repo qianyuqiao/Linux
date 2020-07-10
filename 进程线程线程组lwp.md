@@ -1,27 +1,38 @@
 ### 1.pid到底是什么？
 ```
+#include <unistd.h>
 #include <stdio.h>
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
 
-void *hello(int a)
+struct message
+{
+    int i;
+    int j;
+};
+
+void *hello(void* str)
 {
     printf("child, the tid=%lu, pid=%d\n",pthread_self(),syscall(SYS_gettid));
-    printf("a = %d\n", a);
+//    printf("the arg.i is %d, arg.j is %d\n",str->i,str->j);
     printf("child, getpid()=%d\n",getpid());
+    while(1);
 }
 
 int main(int argc, char *argv[])
 {
-    int a = 10;
+    struct message test;
     pthread_t thread_id;
-    pthread_create(&thread_id, NULL, hello, a);
+    test.i=10;
+    test.j=20;
+    pthread_create(&thread_id,NULL,hello,(void*)(&test));
     printf("parent, the tid=%lu, pid=%d\n",pthread_self(),syscall(SYS_gettid));
     printf("parent, getpid()=%d\n",getpid());
     pthread_join(thread_id,NULL);
     return 0;
 }
+
 ```
 结果:
 ```
