@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
 ```
 结果:
 ```
+g++   1.cpp  -o 1out  -lpthread
+
 parent, the tid=140102008936192, pid=668
 child, the tid=140102000600832, pid=669
 a = 10
