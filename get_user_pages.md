@@ -18,5 +18,6 @@ force ：/* 不知道有什么特殊的动作 */
 
 pages ：存放获取的struct page的指针数组
 
-vms ： 返回各个页对应的struct vm_area_struct，可以传入NULL表示不获取，struct vm_area_struct应该是用于组成用户区进程内存的堆的基本元素？没仔细研究
+vms ： 返回各个页对应的struct vm_area_struct，可以传入NULL表示不获取，
+struct vm_area_struct应该是用于组成用户区进程内存的堆的基本元素？
 ```
